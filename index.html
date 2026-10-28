@@ -673,8 +673,7 @@ function end(win){
  if(win)$("op").innerHTML=TOTAL+" 處全部找到，共花了 "+(SECS-left)+" 秒（還剩 "+left+" 秒）。<span class=\"reward\">通關獎勵：享買畫及裱框 11% 優惠。<small>限使用一次</small></span>";   // 獎勵文字：番薯 10/28 指定
  else $("op").textContent=why+"，這次找到 "+found.size+" 處。要在限時內找滿 11 處才算成功。";
  $("showans").style.display=win?"none":"block";
- clearTimeout(overT);overT=setTimeout(()=>{$("over").style.display="flex";if(win){confetti();if(navigator.vibrate)navigator.vibrate([30,40,30,40,90])}},500);
- $("again2").classList.add("show");
+ clearTimeout(overT);overT=setTimeout(()=>{$("again2").classList.add("show");$("over").style.display="flex";if(win){confetti();if(navigator.vibrate)navigator.vibrate([30,40,30,40,90])}},500);   // 「再玩一次」跟結果畫面同一刻出現，不要比結果畫面早半秒閃一下（番薯 10/28）
 }
 function start(){
  if(!artReady)return;
