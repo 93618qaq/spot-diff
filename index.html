@@ -171,6 +171,10 @@ button.alt{background:var(--card);color:var(--zhu-deep);border-color:var(--zhu);
 #over.win #again{background:transparent;color:var(--jin-lt);border-color:rgba(255,230,168,.85);box-shadow:none}   /* 通關時「領取優惠券」是主鈕，再玩一次退成外框鈕 */
 @media (prefers-reduced-motion:reduce){#over #cpn{animation:none}}
 #over .btns{position:relative;display:flex;flex-direction:column;gap:10px;align-items:stretch}
+/* 通關視窗：獎勵框→領券鈕→再玩一次→換一幅畫，肉眼看到的間距一律約 16px（領券鈕與獎勵框底部各有 5px／3px 立體邊，所以 margin 要多補）；番薯 10/30 12:07 指示「上下距離抓平均」 */
+#over.win #op{margin-bottom:19px}
+#over.win #cpn{margin-bottom:21px}
+#over.win .btns{gap:16px}
 #over button{font-size:16px;padding:15px 20px 15px 23px;background:linear-gradient(180deg,#fff0b8,#f3bf45);color:var(--zhu-dark);border-color:#fff0b8;text-shadow:none;box-shadow:0 5px 0 #a8730f,0 8px 14px rgba(0,0,0,.25),inset 0 2px 0 rgba(255,255,255,.6)}
 #over button:active{transform:translateY(4px);box-shadow:0 1px 0 #a8730f,0 2px 6px rgba(0,0,0,.25)}
 #over button.alt{background:transparent;color:var(--jin-lt);border-color:rgba(255,230,168,.85);box-shadow:none}
@@ -670,7 +674,7 @@ function end(win){
  setTimeout(()=>sound(win?"win":"lose"),250);
  $("cpn").style.display=win?"block":"none";$("cpnote").innerHTML="";$("oi").textContent=win?"福":"加油";$("over").className=win?"win":"lose";
  $("oh").textContent=win?"挑戰成功":"挑戰失敗";
- if(win)$("op").innerHTML=TOTAL+" 處全部找到，共花了 "+(SECS-left)+" 秒（還剩 "+left+" 秒）。<span class=\"reward\">通關獎勵：享買畫及裱框 11% 優惠。<small>限使用一次</small></span>";   // 獎勵文字：番薯 10/28 指定
+ if(win)$("op").innerHTML=TOTAL+" 處全部找到，共花了 "+(SECS-left)+" 秒（還剩 "+left+" 秒）。<span class=\"reward\">通關獎勵：享買畫及裱框 11% 優惠。<small>限使用一次</small><small>到店請出示此畫面與 LINE 優惠券</small></span>";   // 獎勵文字：番薯 10/28 指定；到店出示提示：番薯 10/30 12:04 同意
  else $("op").textContent=why+"，這次找到 "+found.size+" 處。要在限時內找滿 11 處才算成功。";
  $("showans").style.display=win?"none":"block";
  clearTimeout(overT);overT=setTimeout(()=>{$("again2").classList.add("show");$("over").style.display="flex";if(win){confetti();if(navigator.vibrate)navigator.vibrate([30,40,30,40,90])}},500);   // 「再玩一次」跟結果畫面同一刻出現，不要比結果畫面早半秒閃一下（番薯 10/28）
