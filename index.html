@@ -252,7 +252,7 @@ button.alt{background:var(--card);color:var(--zhu-deep);border-color:var(--zhu);
 @keyframes ping{from{transform:translate(-50%,-50%) scale(.6);opacity:1}to{transform:translate(-50%,-50%) scale(2.3);opacity:0}}
 .fxword{position:absolute;pointer-events:none;z-index:5;white-space:nowrap;font:700 15px/1 var(--serif);letter-spacing:.08em;color:var(--zhu-dark);background:linear-gradient(180deg,#fff0b8,#f6c74f);border:2px solid #fff;padding:6px 12px;border-radius:999px;box-shadow:0 3px 8px rgba(0,0,0,.3);animation:word 1.1s cubic-bezier(.2,.9,.3,1) forwards}
 @keyframes word{0%{transform:translate(-50%,-30%) scale(.4);opacity:0}20%{transform:translate(-50%,-60%) scale(1.15);opacity:1}35%{transform:translate(-50%,-60%) scale(1)}80%{opacity:1}100%{transform:translate(-50%,-170%) scale(1);opacity:0}}
-.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
 .confetti i{position:absolute;top:-24px;left:var(--x);width:var(--w);height:var(--h);background:var(--c);border-radius:var(--br);opacity:0;animation:fall var(--d) var(--dl) cubic-bezier(.3,.1,.6,1) forwards}
 @keyframes fall{0%{opacity:1;transform:translate3d(0,0,0) rotate(0)}100%{opacity:1;transform:translate3d(var(--sway),110vh,0) rotate(var(--rot))}}
 @media (max-width:600px){.hero h1{font-size:40px}.lantern{width:36px}}
@@ -273,7 +273,7 @@ button.alt{background:var(--card);color:var(--zhu-deep);border-color:var(--zhu);
 @media (max-width:600px){.banner{font-size:34px;padding:12px 22px 12px 26px}}
 @media (prefers-reduced-motion:reduce){.flycoin,.fw,.banner{display:none}}
 /* ===== 第三輪：真煙火（火箭＋爆炸＋閃光）、鞭炮串 ===== */
-.fxtop{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2}
+.fxtop{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:2}
 .rocket{position:absolute;width:5px;height:22px;margin-left:-2.5px;border-radius:3px;background:linear-gradient(#fff,#ffd54a 45%,rgba(255,150,40,0));box-shadow:0 0 9px 2px rgba(255,200,80,.85)}
 .cflash{position:absolute;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:radial-gradient(circle,#fffbd0 0%,#ffd24a 30%,rgba(255,120,20,.65) 55%,transparent 72%);animation:cflash .3s ease-out forwards}
 .cflash.big{width:150px;height:150px;margin:-75px 0 0 -75px;animation-duration:.45s}
@@ -674,10 +674,10 @@ function end(win){
  setTimeout(()=>sound(win?"win":"lose"),250);
  $("cpn").style.display=win?"block":"none";$("cpnote").innerHTML="";$("oi").textContent=win?"福":"加油";$("over").className=win?"win":"lose";
  $("oh").textContent=win?"挑戰成功":"挑戰失敗";
- if(win)$("op").innerHTML=TOTAL+" 處全部找到，共花了 "+(SECS-left)+" 秒（還剩 "+left+" 秒）。<span class=\"reward\">通關獎勵：享買畫及裱框 11% 優惠。<small>限使用一次</small><small>到店請出示此畫面與 LINE 優惠券</small></span>";   // 獎勵文字：番薯 10/28 指定；到店出示提示：番薯 10/30 12:04 同意
+ if(win)$("op").innerHTML=TOTAL+" 處全部找到，共花了 "+(SECS-left)+" 秒（還剩 "+left+" 秒）。<span class=\"reward\">通關獎勵：享買畫及裱框 11% 優惠。<small>限使用一次</small><small>請於 11/11 前使用</small><small>到店請出示此畫面與 LINE 優惠券</small></span>";   // 獎勵文字：番薯 10/28 指定；到店出示提示：番薯 10/30 12:04 同意；期限 11/11（LINE 後台券有效期間到 2026/11/11 23:59）：番薯 10/30 13:39 同意
  else $("op").textContent=why+"，這次找到 "+found.size+" 處。要在限時內找滿 11 處才算成功。";
  $("showans").style.display=win?"none":"block";
- clearTimeout(overT);overT=setTimeout(()=>{$("again2").classList.add("show");$("over").style.display="flex";if(win){confetti();if(navigator.vibrate)navigator.vibrate([30,40,30,40,90])}},500);   // 「再玩一次」跟結果畫面同一刻出現，不要比結果畫面早半秒閃一下（番薯 10/28）
+ clearTimeout(overT);overT=setTimeout(()=>{$("again2").classList.add("show");$("over").style.display="flex";$("over").scrollTop=0;if(win){confetti();if(navigator.vibrate)navigator.vibrate([30,40,30,40,90])}},500);   // 「再玩一次」跟結果畫面同一刻出現，不要比結果畫面早半秒閃一下（番薯 10/28）
 }
 function start(){
  if(!artReady)return;
